@@ -1,10 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 const app = express();
 
 app.use(express.json());
+
 app.use(cors());
 
-app.listen(() => console.log(`Server runs on port: ${PORT}`));
+const posts = require('./routes/api/posts');
+
+app.use('/api/posts', posts);
+
+app.listen(port, () => console.log(`Server started on port ${port}`));
